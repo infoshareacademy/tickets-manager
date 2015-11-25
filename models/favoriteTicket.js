@@ -1,3 +1,11 @@
-/**
- * Created by fiona on 25.11.15.
- */
+var mongoose = require('mongoose');
+
+var favoriteTicketSchema = new mongoose.Schema({
+	title: String,
+	auctionUrl: String,
+	description: String,
+	price: Number,
+	type: String
+});
+
+module.exports = mongoose.model('favoriteTicket', favoriteTicketSchema);

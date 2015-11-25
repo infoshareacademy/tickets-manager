@@ -1,51 +1,36 @@
+// include packages to our project
+
 var express = require('express');
+var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+var cors = require('cors');
+
+var favoriteTicket = require('./models/favoriteTicket');
+var favoriteTicketController = require('./_controllers/favoriteTicketController');
+
+//connecting to DB
+mongoose.connect('mongodb://localhost:27017/ticket-manager');
+
+// create the app itself
+
 var app = express();
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use(cors());
 
 var router = express.Router();
 
-app.set('view engine', 'ejs');
+router.route('/favorite')
+    .post(favoriteTicketController.postFavoriteTickets)
+    .get(favoriteTicketController.getFavoriteTickets);
 
-app.get('/favorites', function (req, res) {
-    var favoriteTickets = [
-        {
-            title: 'Bilety Judas Priest Golden Circle 10.12 NAJTANIEJ',
-            auctionUrl: 'http:\/\/allegro.pl\/show_item.php?item=5810179925',
-            description: '',
-            price: 15,
-            type: 'music'
-        },
-        {
-            title: 'Bilet na koncert Marcusa Millera Gdynia 1',
-            auctionUrl: '',
-            description: 'vyubimk mnbvcgfyhujn bgcfyuhjkn bvghujknbvfyguij',
-            price: 315,
-            type: 'music'
-        },
-        {
-            title: 'Bilety sezon letni Lechia Gdansk',
-            auctionUrl: '',
-            description: 'dfghjkl;lkjhgfdrtyuiogfcv bnmkiuytgfv bnmiuygv nkiuygfvcbnjuyg',
-            price: 135,
-            type: 'sport'
-        },
-        {
-            title: 'Bilet mecz Arka Gdynia',
-            auctionUrl: '',
-            description: '',
-            price: 35,
-            type: 'sport'
-        }
-    ];
+router.route('/favorite/:favoriteTicket_id')
+    .get(favoriteTicketController.getFavoriteTicket)
+    .put(favoriteTicketController.putFavoriteTicket)
+    .delete(favoriteTicketController.deleteFavoriteTicket);
 
-    var title = 'Osoby!';
-
-	res.render('pages/index', {
-        family: people,
-        title: title
-    });
-});
-
-app.use('/tickets', router)
+app.use('/tickets', router);
 
 app.listen(3000);
 
