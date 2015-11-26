@@ -23,8 +23,9 @@ exports.postFavoriteTickets = function(req, res) {
 	favoriteTicket.save(function(err) {
 		if (err) {
 			res.send(err);
-		}
-		res.json({message: 'Ticket added to favorites', data: favoriteTicket});
+		} else {
+		    res.json({message: 'Ticket added to favorites', data: favoriteTicket});
+        }
 	});
 };
 
