@@ -17,18 +17,18 @@ exports.cron = function (app) {
         }
     });
 
-    var j = schedule.scheduleJob('*/10 * * * * *', function () {
-        console.log('The answer to life, the universe, and everything!');
-        var mailAddress;
-        Subscriber.find({}, function (err, subscribers) {
-            subscribers.forEach(function(people) {
-                mailAddress = people['email'];
-                sendMail(mailAddress);
-                console.log(mailAddress);
-            });
-        });
-
-    });
+    //var j = schedule.scheduleJob('*/10 * * * * *', function () {
+    //    console.log('The answer to life, the universe, and everything!');
+    //    var mailAddress;
+    //    Subscriber.find({}, function (err, subscribers) {
+    //        subscribers.forEach(function(people) {
+    //            mailAddress = people['email'];
+    //            sendMail(mailAddress);
+    //            console.log(mailAddress);
+    //        });
+    //    });
+    //
+    //});
 
     var sendMail = function(mailAddress) {
         app.mailer.send('email', {
