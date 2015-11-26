@@ -19,7 +19,7 @@ exports.cron = function (app) {
         }
     });
 
-    var j = schedule.scheduleJob('*/10 * * * * *', function () {
+    var j = schedule.scheduleJob('* * * 1 * *', function () {
         console.log('The answer to life, the universe, and everything!');
         Subscriber.find({}, function (err, subscribers) {
             subscribers.forEach(function(people) {
@@ -50,7 +50,7 @@ exports.cron = function (app) {
 
     var getTickets = function () {
         var dfd = q.defer();
-        http.get('http://localhost:8080/tickets-filter/app_dev.php/import?format=pretty', function (res, err) {
+        http.get('http://test.tickets-processor.infoshareaca.nazwa.pl/import', function (res, err) {
             if (err) {
                 dfd.reject(err);
                 console.log(err);
