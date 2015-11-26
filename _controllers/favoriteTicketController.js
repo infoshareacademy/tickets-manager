@@ -4,8 +4,9 @@ exports.getFavoriteTickets = function (req,res) {
 	FavoriteTicket.find(function(err, favoriteTickets){
 		if(err){
 			res.send(err);
-		}
-		res.json(favoriteTickets);
+		} else {
+            res.json(favoriteTickets);
+        }
 	});
 };
 
@@ -33,8 +34,9 @@ exports.getFavoriteTicket = function (req, res) {
     FavoriteTicket.findById(req.params.favoriteTicket_id, function(err, favoriteTicket) {
         if (err) {
             res.status(404).send(err);
+        } else {
+            res.send(favoriteTicket);
         }
-        res.send(favoriteTicket);
     });
 };
 
@@ -42,7 +44,8 @@ exports.deleteFavoriteTicket = function (req, res) {
     FavoriteTicket.findByIdAndRemove(req.params.favoriteTicket_id, function(err) {
         if (err) {
             res.status(409).send(err);
+        } else {
+            res.json({message: 'Ticket removed from favorite tickets'});
         }
-        res.json({message: 'Ticket removed from favorite tickets'});
     });
 };
