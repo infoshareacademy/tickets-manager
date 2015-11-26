@@ -31,7 +31,6 @@ router.route('/fav-tickets')
 
 router.route('/fav-tickets/:favoriteTicket_id')
     .get(favoriteTicketController.getFavoriteTicket)
-    .put(favoriteTicketController.putFavoriteTicket)
     .delete(favoriteTicketController.deleteFavoriteTicket);
 
 router.route('/subscribers')
