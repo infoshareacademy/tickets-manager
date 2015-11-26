@@ -7,6 +7,7 @@ var cors = require('cors');
 
 var favoriteTicket = require('./models/favoriteTicket');
 var favoriteTicketController = require('./_controllers/favoriteTicketController');
+var subscriberController = require('./_controllers/subscriberController');
 
 //connecting to DB
 mongoose.connect('mongodb://localhost:27017/ticket-manager');
@@ -21,16 +22,24 @@ app.use(cors());
 
 var router = express.Router();
 
-router.route('/favorite')
+router.route('/fav-tickets')
     .post(favoriteTicketController.postFavoriteTickets)
     .get(favoriteTicketController.getFavoriteTickets);
 
-router.route('/favorite/:favoriteTicket_id')
+router.route('/fav-tickets/:favoriteTicket_id')
     .get(favoriteTicketController.getFavoriteTicket)
     .put(favoriteTicketController.putFavoriteTicket)
     .delete(favoriteTicketController.deleteFavoriteTicket);
 
-app.use('/tickets', router);
+router.route('subscribers')
+    .get(subscriberController.getSubscribers)
+    .post(subscriberController.postSubscriber);
+
+router.route('subscribers/:subscriber_id')
+    .delete(subscriberController.deleteSubscriber);
+
+
+app.use('/', router);
 
 app.listen(3000);
 
