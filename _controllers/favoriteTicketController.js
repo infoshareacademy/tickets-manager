@@ -22,7 +22,7 @@ exports.postFavoriteTickets = function(req, res) {
 
 	favoriteTicket.save(function(err) {
 		if (err) {
-			res.send(err);
+			res.status(409).send(err);
 		} else {
 		    res.json({message: 'Ticket added to favorites', data: favoriteTicket});
         }
@@ -32,7 +32,7 @@ exports.postFavoriteTickets = function(req, res) {
 exports.getFavoriteTicket = function (req, res) {
     FavoriteTicket.findById(req.params.favoriteTicket_id, function(err, favoriteTicket) {
         if (err) {
-            res.send(err);
+            res.status(404).send(err);
         }
         res.send(favoriteTicket);
     });
@@ -41,7 +41,7 @@ exports.getFavoriteTicket = function (req, res) {
 exports.deleteFavoriteTicket = function (req, res) {
     FavoriteTicket.findByIdAndRemove(req.params.favoriteTicket_id, function(err) {
         if (err) {
-            res.send(err);
+            res.status(409).send(err);
         }
         res.json({message: 'Ticket removed from favorite tickets'});
     });
