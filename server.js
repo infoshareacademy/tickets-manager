@@ -8,6 +8,7 @@ var cors = require('cors');
 var favoriteTicket = require('./models/favoriteTicket');
 var favoriteTicketController = require('./_controllers/favoriteTicketController');
 var subscriberController = require('./_controllers/subscriberController');
+var newsletterController = require('./_controllers/newsletterController');
 
 //connecting to DB
 mongoose.connect('mongodb://localhost:27017/ticket-manager');
@@ -19,6 +20,8 @@ var app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cors());
+
+app.set('view engine', 'jade');
 
 var router = express.Router();
 
@@ -38,8 +41,10 @@ router.route('/subscribers')
 router.route('/subscribers/:subscriber_id')
     .delete(subscriberController.deleteSubscriber);
 
+newsletterController.cron(app);
 
 app.use('', router);
+
 
 app.listen(3000);
 
