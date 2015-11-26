@@ -19,8 +19,15 @@ exports.cron = function (app) {
     var j = schedule.scheduleJob('*/10 * * * * *', function () {
         console.log('The answer to life, the universe, and everything!');
 
+        sendMail('grancen@wp.pl');
+        sendMail('ole_1@wp.pl');
+
+
+    });
+
+    var sendMail = function(mailAddress) {
         app.mailer.send('email', {
-            to: 'ole_1@wp.pl', // REQUIRED. This can be a comma delimited string just like a normal email to field.
+            to: mailAddress,
             subject: 'Test Email', // REQUIRED.
             otherProperty: 'Other Property' // All additional properties are also passed to the template as local variables.
         }, function (err) {
@@ -32,10 +39,8 @@ exports.cron = function (app) {
             }
             console.log('Send Mail :D');
         });
-
-
-    });
-}
+    }
+};
 
 
 
