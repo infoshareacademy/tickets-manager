@@ -1,5 +1,6 @@
 var schedule = require('node-schedule');
 var mailer = require('express-mailer');
+var Subscriber = require('../models/subscriber.js');
 
 
 exports.cron = function (app) {
@@ -18,10 +19,14 @@ exports.cron = function (app) {
 
     var j = schedule.scheduleJob('*/10 * * * * *', function () {
         console.log('The answer to life, the universe, and everything!');
-
-        sendMail('grancen@wp.pl');
-        sendMail('ole_1@wp.pl');
-
+        var mailAddress;
+        Subscriber.find({}, function (err, subscribers) {
+            subscribers.forEach(function(people) {
+                mailAddress = people['email'];
+                sendMail(mailAddress);
+                console.log(mailAddress);
+            });
+        });
 
     });
 
