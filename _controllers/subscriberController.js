@@ -17,7 +17,8 @@ exports.postSubscriber = function(req, res) {
 
     subscriber.save(function(err) {
         if(err) {
-            res.send(err);
+            res.status(409).send(err);
+
         }
         else {
             res.json({
