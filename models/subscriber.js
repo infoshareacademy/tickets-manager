@@ -2,11 +2,10 @@ var mongoose = require('mongoose');
 
 var subscriberSchema = new mongoose.Schema({
     name: String,
-    mail: {
+    email: {
         type: String,
-        index: {
-            unique: true
-        }
+        unique: true,
+        required: true
     }
 });
 

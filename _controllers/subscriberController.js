@@ -19,10 +19,12 @@ exports.postSubscriber = function(req, res) {
         if(err) {
             res.send(err);
         }
-        res.json({
-            message: 'Your email was add to subscriber\'s list',
-            data: subscriber
-        });
+        else {
+            res.json({
+                message: 'Your email was add to subscriber\'s list',
+                data: subscriber
+            });
+        }
     });
 };
 

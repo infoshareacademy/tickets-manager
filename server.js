@@ -31,15 +31,15 @@ router.route('/fav-tickets/:favoriteTicket_id')
     .put(favoriteTicketController.putFavoriteTicket)
     .delete(favoriteTicketController.deleteFavoriteTicket);
 
-router.route('subscribers')
+router.route('/subscribers')
     .get(subscriberController.getSubscribers)
     .post(subscriberController.postSubscriber);
 
-router.route('subscribers/:subscriber_id')
+router.route('/subscribers/:subscriber_id')
     .delete(subscriberController.deleteSubscriber);
 
 
-app.use('/', router);
+app.use('', router);
 
 app.listen(3000);
 
