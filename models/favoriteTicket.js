@@ -9,7 +9,7 @@ var favoriteTicketSchema = new mongoose.Schema({
 		}
 	},
 	description: String,
-	price: Number,
+	price: String,
 	type: String
 });
 
