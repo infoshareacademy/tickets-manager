@@ -20,6 +20,7 @@ exports.postSubscriber = function(req, res) {
             res.status(409).send(err);
 
         }
+
         else {
             res.json({
                 message: 'Your email was add to subscriber\'s list',
@@ -30,7 +31,7 @@ exports.postSubscriber = function(req, res) {
 };
 
 exports.deleteSubscriber = function (req, res) {
-    Subscriber.findByIdAndRemove(req.params.subscriber_id, function (err) {
+    Subscriber.findOneAndRemove({email: req.body.email}, function (err) {
         if (err) {
             res.send(err);
         }
