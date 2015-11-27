@@ -90,7 +90,7 @@ module.exports = function(passport){
 	// handle the callback after facebook has authenticated the user
 	router.get('/login/facebook/callback',
 		passport.authenticate('facebook', {
-				failureRedirect : 'http://localhost:63342/tickets-gui/src/app/index.html'
+				failureRedirect : 'http://localhost:63342/tickets-gui/src/app/index.html#/login'
 		}),
 		function(req, res) {
 			// Successful authentication, redirect home.
