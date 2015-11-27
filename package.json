@@ -23,6 +23,7 @@
     "express-mailer": "^0.3.0",
     "jade": "^1.11.0",
     "mongoose": "^4.2.7",
-    "node-schedule": "^0.5.1"
+    "node-schedule": "^0.5.1",
+    "q": "^1.4.1"
   }
 }
