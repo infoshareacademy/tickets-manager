@@ -1,39 +1,25 @@
-// include packages to our project
-
 var express = require('express');
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
-var cors = require('cors');
-
-var favoriteTicket = require('./models/favoriteTicket');
-var favoriteTicketController = require('./_controllers/favoriteTicketController');
-var newsletterController = require('./_controllers/newsletterController');
-
-
 var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 
-
-//connecting to DB
-mongoose.connect('mongodb://localhost:27017/ticket-manager');
+var dbConfig = require('./db');
+var mongoose = require('mongoose');
+// Connect to DB
+mongoose.connect(dbConfig.url);
 
 var app = express();
-
-
-app.set('view engine', 'jade');
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(cors());
 app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -53,8 +39,6 @@ app.use(flash());
 // Initialize Passport
 var initPassport = require('./passport/init');
 initPassport(passport);
-
-newsletterController.cron(app);
 
 var routes = require('./routes/index')(passport);
 app.use('/', routes);
