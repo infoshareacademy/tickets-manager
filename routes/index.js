@@ -95,7 +95,7 @@ module.exports = function(passport){
 		function(req, res) {
 			// Successful authentication, redirect home.
 			console.log('!!!!'+ req.user.fb.id);
-			res.redirect('http://localhost:63342/tickets-gui/src/app/index.html#/checklogin?id=' + req.user.fb.id);
+			res.redirect('http://localhost:63342/tickets-gui/src/app/index.html#/login?id=' + req.user.fb.id);
 		}
 			//successRedirect : 'http://localhost:63342/tickets-gui/src/app/index.html#/dashboard/overview',
 
