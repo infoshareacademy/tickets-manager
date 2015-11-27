@@ -35,10 +35,9 @@ router.route('/fav-tickets/:favoriteTicket_id')
 
 router.route('/subscribers')
     .get(subscriberController.getSubscribers)
-    .post(subscriberController.postSubscriber);
-
-router.route('/subscribers/:subscriber_id')
+    .post(subscriberController.postSubscriber)
     .delete(subscriberController.deleteSubscriber);
+
 
 newsletterController.cron(app);
 

@@ -19,15 +19,15 @@ exports.cron = function (app) {
         }
     });
 
-    var j = schedule.scheduleJob('* * * 1 * *', function () {
-        console.log('The answer to life, the universe, and everything!');
-        Subscriber.find({}, function (err, subscribers) {
-            subscribers.forEach(function(people) {
-                sendMail(people);
-            });
-        });
+    //var j = schedule.scheduleJob('* * * 1 * *', function () {
+    //    console.log('The answer to life, the universe, and everything!');
+    //    Subscriber.find({}, function (err, subscribers) {
+    //        subscribers.forEach(function(people) {
+    //            sendMail(people);
+    //        });
+    //    });
 
-    });
+    //});
 
     var sendMail = function(subscriber) {
         getTickets().then(function (tickets){
