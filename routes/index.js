@@ -90,9 +90,15 @@ module.exports = function(passport){
 	// handle the callback after facebook has authenticated the user
 	router.get('/login/facebook/callback',
 		passport.authenticate('facebook', {
-			successRedirect : '/home',
-			failureRedirect : '/'
-		})
+				failureRedirect : 'http://localhost:63342/tickets-gui/src/app/index.html'
+		}),
+		function(req, res) {
+			// Successful authentication, redirect home.
+			console.log('!!!!'+ req.user.fb.id);
+			res.redirect('http://localhost:63342/tickets-gui/src/app/index.html#/checklogin?id=' + req.user.fb.id);
+		}
+			//successRedirect : 'http://localhost:63342/tickets-gui/src/app/index.html#/dashboard/overview',
+
 	);
     
 	return router;
