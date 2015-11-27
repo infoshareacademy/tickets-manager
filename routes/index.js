@@ -53,22 +53,35 @@ module.exports = function(passport){
 
 
 
-	router.route('/fav-tickets')
-		.post(favoriteTicketController.postFavoriteTickets)
-		.get(favoriteTicketController.getFavoriteTickets);
+	router.get('/fav-tickets', isAuthenticated, favoriteTicketController.getFavoriteTickets);
+	router.post('/fav-tickets', isAuthenticated, favoriteTicketController.postFavoriteTickets);
 
-	router.route('/fav-tickets/:favoriteTicket_id')
-		.get(favoriteTicketController.getFavoriteTicket)
-		.delete(favoriteTicketController.deleteFavoriteTicket);
+	//router.route('/fav-tickets', isAuthenticated)
+	//	.post(favoriteTicketController.postFavoriteTickets)
+	//	.get(favoriteTicketController.getFavoriteTickets);
 
-	router.route('/subscribers')
-		.get(subscriberController.getSubscribers)
-		.post(subscriberController.postSubscriber);
+	router.get('/fav-tickets/:favoriteTicket_id', isAuthenticated, favoriteTicketController.getFavoriteTicket);
+	router.delete('/fav-tickets/:favoriteTicket_id', isAuthenticated, favoriteTicketController.deleteFavoriteTicket);
 
-	router.route('/subscribers/:subscriber_id')
-		.delete(subscriberController.deleteSubscriber);
-    
-    // route for facebook authentication and login
+	//router.route('/fav-tickets/:favoriteTicket_id', isAuthenticated)
+	//	.get(favoriteTicketController.getFavoriteTicket)
+	//	.delete(favoriteTicketController.deleteFavoriteTicket);
+
+	router.get('/subscribers', isAuthenticated, subscriberController.getSubscribers);
+	router.delete('/subscribers', isAuthenticated, subscriberController.postSubscriber);
+
+	//router.route('/subscribers', isAuthenticated)
+	//	.get(subscriberController.getSubscribers)
+	//	.post(subscriberController.postSubscriber);
+
+	router.delete('/subscribers/:subscriber_id', isAuthenticated, subscriberController.deleteSubscriber);
+
+	//router.route('/subscribers/:subscriber_id')
+	//	.delete(subscriberController.deleteSubscriber);
+
+
+
+	// route for facebook authentication and login
 	// different scopes while logging in
 	router.get('/login/facebook', 
 		passport.authenticate('facebook', { scope : 'email' }
