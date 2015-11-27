@@ -20,6 +20,7 @@ exports.postFavoriteTickets = function(req, res) {
 	favoriteTicket.description = req.body.description;
 	favoriteTicket.price = req.body.price;
 	favoriteTicket.type = req.body.type;
+	favoriteTicket.user = req.body.user;
 
 	favoriteTicket.save(function(err) {
 		if (err) {
